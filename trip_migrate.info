@@ -1,0 +1,7 @@
+name = "Trip.ee D6 to D7 migration"
+core = 7.x
+
+dependencies[] = migrate
+dependencies[] = migrate_d2d
+
+files[] = node.inc

@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * Implementation of hook_flush_caches().
+ */
+function trip_migrate_flush_caches() {
+  trip_migrate_register_migrations();
+}
+
+/**
+ * Register all D6->D7 migrations.
+ */
+function trip_migrate_register_migrations() {
+
+  $common_arguments = array(
+    'source_connection' => 'trip',
+    'source_version' => 6,
+  );
+
+  // The description and the migration machine name are also required arguments,
+  // which will be unique for each migration you register.
+  $arguments = $common_arguments + array(
+    'description' => t('Migration of users from Drupal 6'),
+    'machine_name' => 'User',
+  );
+
+  Migration::registerMigration('DrupalUser6Migration', $arguments['machine_name'],
+  $arguments);
+
+ $vocabulary_arguments = array(
+  array(
+    'description' => t('Migration of Destination terms from Drupal 6'),
+    'machine_name' => 'TripDestinationTerm',
+    'source_vocabulary' => '6',
+    'destination_vocabulary' => 'tags',
+    ),
+  );
+
+  $common_vocabulary_arguments = $common_arguments + array(
+    'class_name' => 'DrupalTerm6Migration',
+    'soft_dependencies' => array('User'),
+  );
+                             
+  foreach ($vocabulary_arguments as $arguments) {
+    $arguments += $common_vocabulary_arguments;
+    Migration::registerMigration($arguments['class_name'], $arguments['machine_name'], $arguments);
+  }
+
+
+  // Node migrations - each has its own class derived from the migrate_d2d class,
+  // specifying its particular field mappings and transformations. source_type
+  // and destination_type are required arguments.
+  $node_arguments = array(
+    array(
+      'class_name' => 'TripForumNodeMigration',
+      'description' => t('Migration of article nodes from Drupal 6'),
+      'machine_name' => 'TripForumNode',
+      'source_type' => 'trip_forum',
+      'destination_type' => 'article',
+    ),
+  );
+  // Tell the node migrations where the users are coming from, so they can
+  // set up the dependency and resolve D6->D7 uids.
+  $common_node_arguments = $common_arguments + array(
+    'user_migration' => 'User',
+  );
+  foreach ($node_arguments as $arguments) {
+    $arguments = array_merge_recursive($arguments, $common_node_arguments);
+    Migration::registerMigration($arguments['class_name'], $arguments['machine_name'],
+    $arguments);
+  }
+
+}
+
+/**
+ * Implementation of hook_migrate_api().
+ */
+function trip_migrate_migrate_api() {
+  $api = array(
+    'api' => 2,
+  );
+  return $api;
+}

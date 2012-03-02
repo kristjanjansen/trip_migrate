@@ -53,6 +53,8 @@ function trip_migrate_register_migrations() {
       'machine_name' => 'TripNodeForum',
       'source_type' => 'trip_forum',
       'destination_type' => 'article',
+      'soft_dependencies' => array('TripTermDestination'),
+      
     ),
   );
 
@@ -71,6 +73,8 @@ function trip_migrate_register_migrations() {
     'description' => t('Migration of comments from Drupal 6'),
     'machine_name' => 'TripComment',    
     'user_migration' => 'User',
+    'soft_dependencies' => array('TripNodeForum'),
+    
   );
 
   Migration::registerMigration('TripCommentMigration', $comment_arguments['machine_name'],

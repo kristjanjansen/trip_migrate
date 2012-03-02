@@ -25,6 +25,7 @@ function trip_migrate_register_migrations() {
   Migration::registerMigration('DrupalUser6Migration', $arguments['machine_name'],
   $arguments);
 
+
  $vocabulary_arguments = array(
   array(
     'description' => t('Migration of Destination terms from Drupal 6'),
@@ -36,7 +37,7 @@ function trip_migrate_register_migrations() {
 
   $common_vocabulary_arguments = $common_arguments + array(
     'class_name' => 'DrupalTerm6Migration',
-    'soft_dependencies' => array('User'),
+    'soft_dependencies' => array('TripUser'),
   );
                              
   foreach ($vocabulary_arguments as $arguments) {
@@ -47,7 +48,7 @@ function trip_migrate_register_migrations() {
 
   $node_arguments = array(
     array(
-      'class_name' => 'DrupalNode6Migration',
+      'class_name' => 'TripForumNodeMigration',
       'description' => t('Migration of article nodes from Drupal 6'),
       'machine_name' => 'TripNodeForum',
       'source_type' => 'trip_forum',
@@ -55,15 +56,16 @@ function trip_migrate_register_migrations() {
     ),
   );
 
-
   $common_node_arguments = $common_arguments + array(
-    'user_migration' => 'User',
-  );
+    'user_migration' => 'TripUser',
+);
+  
   foreach ($node_arguments as $arguments) {
     $arguments = array_merge_recursive($arguments, $common_node_arguments);
     Migration::registerMigration($arguments['class_name'], $arguments['machine_name'],
     $arguments);
   }
+
 
   $comment_arguments = $common_arguments + array(
     'description' => t('Migration of comments from Drupal 6'),
@@ -73,6 +75,7 @@ function trip_migrate_register_migrations() {
 
   Migration::registerMigration('TripCommentMigration', $comment_arguments['machine_name'],
   $comment_arguments);
+
 }
 
 /**

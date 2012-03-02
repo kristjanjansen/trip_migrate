@@ -1,18 +1,17 @@
 <?php
 
-/**
- * Common mappings for the Drupal 6 node migrations.
- */
-abstract class ExampleNodeMigration extends DrupalNode6Migration {
+
+abstract class TripNodeMigration extends DrupalNode6Migration {
   public function __construct(array $arguments) {
     parent::__construct($arguments);
   }
 }
 
 
-class TripForumNodeMigration extends ExampleNodeMigration {
+class TripForumNodeMigration extends TripNodeMigration {
   public function __construct(array $arguments) {
     parent::__construct($arguments);
   }
 
 }
+

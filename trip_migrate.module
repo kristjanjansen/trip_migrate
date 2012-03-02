@@ -70,6 +70,13 @@ function trip_migrate_register_migrations() {
     $arguments);
   }
 
+  $comment_arguments = $common_arguments + array(
+    'description' => t('Migration of comments from Drupal 6'),
+    'machine_name' => 'Comments',    
+  );
+
+  Migration::registerMigration('TripCommentMigration', $comment_arguments['machine_name'],
+  $comment_arguments);
 }
 
 /**

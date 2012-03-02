@@ -5,3 +5,4 @@ dependencies[] = migrate
 dependencies[] = migrate_d2d
 
 files[] = node.inc
+files[] = comment.inc

@@ -17,11 +17,9 @@ function trip_migrate_register_migrations() {
     'source_version' => 6,
   );
 
-  // The description and the migration machine name are also required arguments,
-  // which will be unique for each migration you register.
   $arguments = $common_arguments + array(
     'description' => t('Migration of users from Drupal 6'),
-    'machine_name' => 'User',
+    'machine_name' => 'TripUser',
   );
 
   Migration::registerMigration('DrupalUser6Migration', $arguments['machine_name'],
@@ -30,7 +28,7 @@ function trip_migrate_register_migrations() {
  $vocabulary_arguments = array(
   array(
     'description' => t('Migration of Destination terms from Drupal 6'),
-    'machine_name' => 'TripDestinationTerm',
+    'machine_name' => 'TripTermDestination',
     'source_vocabulary' => '6',
     'destination_vocabulary' => 'tags',
     ),
@@ -47,20 +45,17 @@ function trip_migrate_register_migrations() {
   }
 
 
-  // Node migrations - each has its own class derived from the migrate_d2d class,
-  // specifying its particular field mappings and transformations. source_type
-  // and destination_type are required arguments.
   $node_arguments = array(
     array(
-      'class_name' => 'TripForumNodeMigration',
+      'class_name' => 'DrupalNode6Migration',
       'description' => t('Migration of article nodes from Drupal 6'),
-      'machine_name' => 'TripForumNode',
+      'machine_name' => 'TripNodeForum',
       'source_type' => 'trip_forum',
       'destination_type' => 'article',
     ),
   );
-  // Tell the node migrations where the users are coming from, so they can
-  // set up the dependency and resolve D6->D7 uids.
+
+
   $common_node_arguments = $common_arguments + array(
     'user_migration' => 'User',
   );
@@ -72,7 +67,8 @@ function trip_migrate_register_migrations() {
 
   $comment_arguments = $common_arguments + array(
     'description' => t('Migration of comments from Drupal 6'),
-    'machine_name' => 'Comments',    
+    'machine_name' => 'TripComment',    
+    'user_migration' => 'User',
   );
 
   Migration::registerMigration('TripCommentMigration', $comment_arguments['machine_name'],

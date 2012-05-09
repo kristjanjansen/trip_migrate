@@ -58,9 +58,7 @@ function trip_migrate_register_migrations() {
         'description' => t('Migration of trip_forum nodes from Drupal 6'),
         'machine_name' => 'TripNodeForum',
         'source_type' => 'trip_forum',
-        'destination_type' => 'article',
-        'soft_dependencies' => array('TripTermDestination'),
-      
+        'destination_type' => 'article',      
       ),
       array(
         'description' => t('Migration of trip_forum_other nodes from Drupal 6'),
@@ -68,11 +66,18 @@ function trip_migrate_register_migrations() {
         'source_type' => 'trip_forum_other',
         'destination_type' => 'article',
       ),
+      array(
+        'description' => t('Migration of trip_forum_expat nodes from Drupal 6'),
+        'machine_name' => 'TripNodeForumExpat',
+        'source_type' => 'trip_forum_expat',
+        'destination_type' => 'article',
+      ),
     );
   
     $common_node_arguments = $common_arguments + array(
       'user_migration' => 'TripUser',
       'class_name' => 'TripNodeMigration',
+      'soft_dependencies' => array('TripTermDestination'),
   );
   
     foreach ($node_arguments as $arguments) {
@@ -98,6 +103,13 @@ function trip_migrate_register_migrations() {
       'source_type' => 'trip_forum_other',
       'destination_type' => 'article',
       'node_migration' => 'TripNodeForumOther',
+    ),
+    array(
+      'description' => t('Migration of trip_forum_expat comments from Drupal 6'),
+      'machine_name' => 'TripNodeForumExpatComment',
+      'source_type' => 'trip_forum_expat',
+      'destination_type' => 'article',
+      'node_migration' => 'TripNodeForumExpat',
     )
   );
 

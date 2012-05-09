@@ -24,13 +24,13 @@ abstract class TripNodeMigration extends DrupalNode6Migration {
 }
 
 
-class TripForumNodeMigration extends TripNodeMigration {
+class TripNodeForumMigration extends TripNodeMigration {
   public function __construct(array $arguments) {
     parent::__construct($arguments);
   }
 }
 
-class TripForumOtherNodeMigration extends TripNodeMigration {
+class TripNodeForumOtherMigration extends TripNodeMigration {
   public function __construct(array $arguments) {
     parent::__construct($arguments);
   }

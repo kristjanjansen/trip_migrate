@@ -1,6 +1,6 @@
 <?php
 
-class TripNodeForumCommentMigration extends DrupalComment6Migration {
+class TripCommentMigration extends DrupalComment6Migration {
 
   public function __construct(array $arguments) {
     parent::__construct($arguments);

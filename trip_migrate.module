@@ -49,6 +49,8 @@ function trip_migrate_register_migrations() {
   }
 
   // Trip forum nodes
+
+/*
   
   $node_arguments = array(
     array(
@@ -71,18 +73,26 @@ function trip_migrate_register_migrations() {
     Migration::registerMigration($arguments['class_name'], $arguments['machine_name'],
     $arguments);
   }
+*/
 
   // Trip forum other nodes
   
     $node_arguments = array(
       array(
-        'class_name' => 'TripForumOtherNodeMigration',
+        'class_name' => 'TripNodeForumMigration',
+        'description' => t('Migration of trip_forum nodes from Drupal 6'),
+        'machine_name' => 'TripNodeForum',
+        'source_type' => 'trip_forum',
+        'destination_type' => 'article',
+        'soft_dependencies' => array('TripTermDestination'),
+      
+      ),
+      array(
+        'class_name' => 'TripNodeForumOtherMigration',
         'description' => t('Migration of trip_forum_other nodes from Drupal 6'),
         'machine_name' => 'TripNodeForumOther',
         'source_type' => 'trip_forum_other',
         'destination_type' => 'article',
-        'soft_dependencies' => array('TripTermDestination'),
-  
       ),
     );
   
@@ -99,35 +109,35 @@ function trip_migrate_register_migrations() {
 
   // Trip forum comments
   
-  $comment_arguments = $common_arguments + array(
-    'description' => t('Migration of comments from Drupal 6'),
-    'machine_name' => 'TripNodeForumComment',
-    'source_type' => 'trip_forum',
-    'destination_type' => 'article',
-    'node_migration' => 'TripNodeForum',
-    'user_migration' => 'TripUser',    
-  );
-
-  Migration::registerMigration('TripNodeForumCommentMigration', $comment_arguments['machine_name'],
-  $comment_arguments);
-
-
-  // Trip other comments
-    
-    $comment_arguments = $common_arguments + array(
+  $comment_arguments = array(
+    array(
+      'description' => t('Migration of trip_forum comments from Drupal 6'),
+      'machine_name' => 'TripNodeForumComment',
+      'source_type' => 'trip_forum',
+      'destination_type' => 'article',
+      'node_migration' => 'TripNodeForum',
+    ),
+    array(
       'description' => t('Migration of trip_forum_other comments from Drupal 6'),
       'machine_name' => 'TripNodeForumOtherComment',
       'source_type' => 'trip_forum_other',
       'destination_type' => 'article',
       'node_migration' => 'TripNodeForumOther',
-      'user_migration' => 'TripUser',    
-    );
-  
-    Migration::registerMigration('TripNodeForumCommentMigration', $comment_arguments['machine_name'],
-    $comment_arguments);
-  
+    )
+  );
+
+  $common_comment_arguments = $common_arguments + array(
+    'user_migration' => 'TripUser',
+    'class_name' => 'TripCommentMigration',
+  );
+    
+  foreach ($comment_arguments as $arguments) {
+    $arguments = array_merge_recursive($arguments, $common_comment_arguments);
+    Migration::registerMigration($arguments['class_name'], $arguments['machine_name'], $arguments);
   }
-  
+
+}  
+       
 
   
 /**

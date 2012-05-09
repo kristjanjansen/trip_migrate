@@ -1,7 +1,7 @@
 <?php
 
 
-abstract class TripNodeMigration extends DrupalNode6Migration {
+class TripNodeMigration extends DrupalNode6Migration {
   public function __construct(array $arguments) {
     parent::__construct($arguments);
     $this->addFieldMapping('nid', 'nid');    
@@ -23,15 +23,3 @@ abstract class TripNodeMigration extends DrupalNode6Migration {
 
 }
 
-
-class TripNodeForumMigration extends TripNodeMigration {
-  public function __construct(array $arguments) {
-    parent::__construct($arguments);
-  }
-}
-
-class TripNodeForumOtherMigration extends TripNodeMigration {
-  public function __construct(array $arguments) {
-    parent::__construct($arguments);
-  }
-}

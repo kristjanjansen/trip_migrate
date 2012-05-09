@@ -17,6 +17,7 @@ function trip_migrate_register_migrations() {
     'source_version' => 6,
   );
 
+
   // Users
   
   $arguments = $common_arguments + array(
@@ -26,6 +27,7 @@ function trip_migrate_register_migrations() {
 
   Migration::registerMigration('DrupalUser6Migration', $arguments['machine_name'],
   $arguments);
+
 
   // Vocabularies
   
@@ -48,38 +50,11 @@ function trip_migrate_register_migrations() {
     Migration::registerMigration($arguments['class_name'], $arguments['machine_name'], $arguments);
   }
 
-  // Trip forum nodes
 
-/*
-  
-  $node_arguments = array(
-    array(
-      'class_name' => 'TripForumNodeMigration',
-      'description' => t('Migration of article nodes from Drupal 6'),
-      'machine_name' => 'TripNodeForum',
-      'source_type' => 'trip_forum',
-      'destination_type' => 'article',
-      'soft_dependencies' => array('TripTermDestination'),
-      
-    ),
-  );
-
-  $common_node_arguments = $common_arguments + array(
-    'user_migration' => 'TripUser',
-);
-  
-  foreach ($node_arguments as $arguments) {
-    $arguments = array_merge_recursive($arguments, $common_node_arguments);
-    Migration::registerMigration($arguments['class_name'], $arguments['machine_name'],
-    $arguments);
-  }
-*/
-
-  // Trip forum other nodes
+  // Nodes
   
     $node_arguments = array(
       array(
-        'class_name' => 'TripNodeForumMigration',
         'description' => t('Migration of trip_forum nodes from Drupal 6'),
         'machine_name' => 'TripNodeForum',
         'source_type' => 'trip_forum',
@@ -88,7 +63,6 @@ function trip_migrate_register_migrations() {
       
       ),
       array(
-        'class_name' => 'TripNodeForumOtherMigration',
         'description' => t('Migration of trip_forum_other nodes from Drupal 6'),
         'machine_name' => 'TripNodeForumOther',
         'source_type' => 'trip_forum_other',
@@ -98,6 +72,7 @@ function trip_migrate_register_migrations() {
   
     $common_node_arguments = $common_arguments + array(
       'user_migration' => 'TripUser',
+      'class_name' => 'TripNodeMigration',
   );
   
     foreach ($node_arguments as $arguments) {
@@ -107,7 +82,7 @@ function trip_migrate_register_migrations() {
     }
     
 
-  // Trip forum comments
+  // Comments
   
   $comment_arguments = array(
     array(

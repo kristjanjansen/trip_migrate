@@ -71,13 +71,14 @@ function trip_migrate_register_migrations() {
 
   $comment_arguments = $common_arguments + array(
     'description' => t('Migration of comments from Drupal 6'),
-    'machine_name' => 'TripComment',    
-    'user_migration' => 'User',
-    'soft_dependencies' => array('TripNodeForum'),
-    
+    'machine_name' => 'TripNodeForumComment',
+    'source_type' => 'trip_forum',
+    'destination_type' => 'article',
+    'node_migration' => 'TripNodeForum',
+    'user_migration' => 'TripUser',    
   );
 
-  Migration::registerMigration('TripCommentMigration', $comment_arguments['machine_name'],
+  Migration::registerMigration('TripNodeForumCommentMigration', $comment_arguments['machine_name'],
   $comment_arguments);
 
 }

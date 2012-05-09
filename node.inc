@@ -28,6 +28,10 @@ class TripForumNodeMigration extends TripNodeMigration {
   public function __construct(array $arguments) {
     parent::__construct($arguments);
   }
-
 }
 
+class TripForumOtherNodeMigration extends TripNodeMigration {
+  public function __construct(array $arguments) {
+    parent::__construct($arguments);
+  }
+}

@@ -10,7 +10,17 @@ class TripUserMigration extends DrupalUser6Migration {
 		$this->addFieldMapping('field_user_image:source_dir')
 		  ->defaultValue('http://localhost/sites/trip/files/pictures');
 	}
-	  
+
+	public function userQuery() {
+  	// Do not attempt to migrate the anonymous or admin user rows.
+  	$query = Database::getConnection('default', $this->sourceConnection)
+  					 ->select('users', 'u')
+  					 ->fields('u')
+  					 ->condition('uid', 1, '>');
+		$query->orderby('uid', 'DESC');
+		return $query;
+  }
+  
 	public function prepareRow($row) {
 		if (parent::prepareRow($row) === FALSE) {
 			return FALSE;

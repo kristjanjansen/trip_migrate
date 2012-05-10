@@ -4,5 +4,6 @@ core = 7.x
 dependencies[] = migrate
 dependencies[] = migrate_d2d
 
+files[] = user.inc
 files[] = node.inc
 files[] = comment.inc

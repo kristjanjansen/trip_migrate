@@ -57,26 +57,35 @@ function trip_migrate_register_migrations() {
       array(
         'description' => t('Migration of trip_forum nodes from Drupal 6'),
         'machine_name' => 'TripNodeForum',
+        'class_name' => 'TripNodeMigration',
         'source_type' => 'trip_forum',
         'destination_type' => 'article',      
       ),
       array(
         'description' => t('Migration of trip_forum_other nodes from Drupal 6'),
         'machine_name' => 'TripNodeForumOther',
+        'class_name' => 'TripNodeMigration',
         'source_type' => 'trip_forum_other',
         'destination_type' => 'article',
       ),
       array(
         'description' => t('Migration of trip_forum_expat nodes from Drupal 6'),
         'machine_name' => 'TripNodeForumExpat',
+        'class_name' => 'TripNodeMigration',
         'source_type' => 'trip_forum_expat',
         'destination_type' => 'article',
+      ),
+      array(
+        'description' => t('Migration of trip_image nodes from Drupal 6'),
+        'machine_name' => 'TripNodeImage',
+        'class_name' => 'TripNodeImageMigration',
+        'source_type' => 'trip_image',
+        'destination_type' => 'trip_image',
       ),
     );
   
     $common_node_arguments = $common_arguments + array(
       'user_migration' => 'TripUser',
-      'class_name' => 'TripNodeMigration',
       'soft_dependencies' => array('TripTermDestination'),
   );
   

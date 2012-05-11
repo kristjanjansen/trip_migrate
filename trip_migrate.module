@@ -80,7 +80,7 @@ function trip_migrate_register_migrations() {
         'machine_name' => 'TripNodeImage',
         'class_name' => 'TripNodeImageMigration',
         'source_type' => 'trip_image',
-        'destination_type' => 'trip_image',
+        'destination_type' => 'image',
       ),
     );
   
@@ -119,6 +119,13 @@ function trip_migrate_register_migrations() {
       'source_type' => 'trip_forum_expat',
       'destination_type' => 'article',
       'node_migration' => 'TripNodeForumExpat',
+    ),
+    array(
+      'description' => t('Migration of trip_image comments from Drupal 6'),
+      'machine_name' => 'TripNodeImageComment',
+      'source_type' => 'trip_image',
+      'destination_type' => 'image',
+      'node_migration' => 'TripNodeImage',
     )
   );
 

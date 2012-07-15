@@ -6,7 +6,16 @@ class TripNodeMigration extends DrupalNode6Migration {
     parent::__construct($arguments);
     $this->addFieldMapping('nid', 'nid');    
     $this->addFieldMapping('is_new')->defaultValue(TRUE);    
-  }
+    $this->addFieldMapping('field_destination', '6')
+      ->sourceMigration('TripTermDestination')
+      ->arguments(array('source_type' => 'tid'));
+    $this->addFieldMapping('field_topic', '9')
+      ->sourceMigration('TripTermTopic')
+      ->arguments(array('source_type' => 'tid'));  
+    $this->addFieldMapping('field_style', '5')
+      ->sourceMigration('TripTermStyle')
+      ->arguments(array('source_type' => 'tid'));     
+    }
 
   protected function nodeQuery() {
     $query = Database::getConnection('default', $this->sourceConnection)

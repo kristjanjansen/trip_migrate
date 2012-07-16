@@ -14,7 +14,7 @@ class TripCommentMigration extends DrupalComment6Migration {
                'mail', 'homepage', 'format'));
     $query->join('node', 'n', 'c.nid = n.nid');
     $query->condition('n.type', $sourceType);
-    $query->orderby('c.timestamp', 'DESC');
+    $query->orderby('c.timestamp', 'ASC');
     
     return $query;
   }

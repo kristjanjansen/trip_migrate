@@ -88,6 +88,13 @@ function trip_migrate_register_migrations() {
         'destination_type' => 'forum_expat',
       ),
       array(
+        'description' => t('Migration of trip_forum_buysell nodes from Drupal 6'),
+        'machine_name' => 'TripNodeForumBuysell',
+        'class_name' => 'TripNodeMigration',
+        'source_type' => 'trip_forum_buysell',
+        'destination_type' => 'forum_buysell',
+      ),
+      array(
         'description' => t('Migration of trip_image nodes from Drupal 6'),
         'machine_name' => 'TripNodeImage',
         'class_name' => 'TripNodeImageMigration',
@@ -131,6 +138,13 @@ function trip_migrate_register_migrations() {
       'source_type' => 'trip_forum_expat',
       'destination_type' => 'forum_expat',
       'node_migration' => 'TripNodeForumExpat',
+    ),
+    array(
+      'description' => t('Migration of trip_forum_buysell comments from Drupal 6'),
+      'machine_name' => 'TripNodeForumBuysellComment',
+      'source_type' => 'trip_forum_buysell',
+      'destination_type' => 'forum_buysell',
+      'node_migration' => 'TripNodeForumBuysell',
     ),
     array(
       'description' => t('Migration of trip_image comments from Drupal 6'),

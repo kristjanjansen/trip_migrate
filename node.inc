@@ -35,6 +35,27 @@ class TripNodeMigration extends DrupalNode6Migration {
 
 }
 
+
+/*
+
+TODO
+
+forum
+voc:19 post_type, tid:821 -> blog
+
+forum_travelmate
+field_millistkaaslastsoovidleida
+field_reisikestvus
+field_reisitoimumine
+
+forum_buysell
+field_buysellprice
+field_buysellcontact
+voc:25 buysell category
+voc:22 buysell type
+
+*/
+
 class TripNodeImageMigration extends TripNodeMigration {
   public function __construct(array $arguments) {
     parent::__construct($arguments);
@@ -45,6 +66,8 @@ class TripNodeImageMigration extends TripNodeMigration {
 		$this->addFieldMapping('field_image_image:file_replace')
 		  ->defaultValue(FILE_EXISTS_REPLACE);
  
+   // TODO: voc:20 image_type
+   
   }
 
   public function prepareRow($row) {

@@ -108,11 +108,25 @@ function trip_migrate_register_migrations() {
         'source_type' => 'trip_image',
         'destination_type' => 'image',
       ),
+      array(
+        'description' => t('Migration of trip_blog nodes from Drupal 6'),
+        'machine_name' => 'TripNodeBlog',
+        'class_name' => 'TripNodeMigration',
+        'source_type' => 'trip_blog',
+        'destination_type' => 'blog',
+      ),
+      array(
+        'description' => t('Migration of story nodes from Drupal 6'),
+        'machine_name' => 'TripNodeNews',
+        'class_name' => 'TripNodeMigration',
+        'source_type' => 'story',
+        'destination_type' => 'news',
+      ),
     );
   
     $common_node_arguments = $common_arguments + array(
       'user_migration' => 'TripUser',
-      'soft_dependencies' => array(),
+      'soft_dependencies' => array('TripTermDestination', 'TripTermTopic', 'TripTermStyle'),
   );
   
     foreach ($node_arguments as $arguments) {
@@ -166,7 +180,21 @@ function trip_migrate_register_migrations() {
       'source_type' => 'trip_image',
       'destination_type' => 'image',
       'node_migration' => 'TripNodeImage',
-    )
+    ),
+    array(
+      'description' => t('Migration of trip_blog comments from Drupal 6'),
+      'machine_name' => 'TripNodeBlogComment',
+      'source_type' => 'trip_blog',
+      'destination_type' => 'blog',
+      'node_migration' => 'TripNodeBlog',
+    ),
+    array(
+      'description' => t('Migration of story comments from Drupal 6'),
+      'machine_name' => 'TripNodeNewsComment',
+      'source_type' => 'story',
+      'destination_type' => 'news',
+      'node_migration' => 'TripNodeNews',
+    ),
   );
 
   $common_comment_arguments = $common_arguments + array(

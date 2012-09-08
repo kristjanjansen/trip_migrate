@@ -19,7 +19,7 @@ class TripUserMigration extends DrupalUser6Migration {
   					 ->select('users', 'u')
   					 ->fields('u')
   					 ->condition('uid', 1, '>');
-		$query->orderby('uid', 'DESC');
+		$query->orderby('uid', 'ASC');
 		return $query;
   }
   

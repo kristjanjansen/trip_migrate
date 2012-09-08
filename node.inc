@@ -3,9 +3,15 @@
 
 class TripNodeMigration extends DrupalNode6Migration {
   public function __construct(array $arguments) {
+    
+    $arguments += array('default_uid' => 0);
+    
     parent::__construct($arguments);
+    
     $this->addFieldMapping('nid', 'nid');    
     $this->addFieldMapping('is_new')->defaultValue(TRUE);    
+
+    $this->addFieldMapping('uid', 'uid')->defaultValue(0);    
     
     $this->addFieldMapping('field_destination', '6')
       ->sourceMigration('TripTermDestination')

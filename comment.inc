@@ -3,7 +3,9 @@
 class TripCommentMigration extends DrupalComment6Migration {
 
   public function __construct(array $arguments) {
-    parent::__construct($arguments);
+
+   parent::__construct($arguments);
+  
   }
 
   protected function commentQuery($sourceType) {
@@ -20,13 +22,13 @@ class TripCommentMigration extends DrupalComment6Migration {
   }
 
   public function prepareRow($row) {
+
     if (parent::prepareRow($row) === FALSE) {
       return FALSE;
     }
   
     $row->format = 'filtered_html';
-    
+
   }
    
-
 }

@@ -10,8 +10,6 @@ class TripNodeMigration extends DrupalNode6Migration {
     
     $this->addFieldMapping('nid', 'nid');    
     $this->addFieldMapping('is_new')->defaultValue(TRUE);    
-
-    $this->addFieldMapping('uid', 'uid');    
     
     $this->addFieldMapping('field_destination', '6')
       ->sourceMigration('TripTermDestination')
@@ -71,7 +69,7 @@ class TripNodeImageMigration extends TripNodeMigration {
   		->defaultValue('http://localhost/sites/trip/files/imagecache/trip_image_big');
 		$this->addFieldMapping('field_image_image:file_replace')
 		  ->defaultValue(FILE_EXISTS_REPLACE);
- 
+  
    // TODO: voc:20 image_type
    
   }
@@ -80,7 +78,7 @@ class TripNodeImageMigration extends TripNodeMigration {
 	  if (parent::prepareRow($row) === FALSE) {
 	    return FALSE;
 	  }
-
+    
 	  $row->image = TripNodeImageMigration::getImage($row->nid);
 	}
 

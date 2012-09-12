@@ -11,6 +11,7 @@ class TripUserMigration extends DrupalUser6Migration {
 		  ->defaultValue('http://localhost/sites/trip/files/pictures');
 		$this->addFieldMapping('field_user_image:file_replace')
 			->defaultValue(FILE_EXISTS_REPLACE);
+			
 	}
 
 	public function userQuery() {
@@ -29,6 +30,7 @@ class TripUserMigration extends DrupalUser6Migration {
 			return FALSE;
 		}
 
+    
 		$row->filename = basename($row->picture);
 	
 	}

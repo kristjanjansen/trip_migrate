@@ -24,6 +24,7 @@ class TripUserMigration extends DrupalUser6Migration {
   }
   
 	public function prepareRow($row) {
+
 		if (parent::prepareRow($row) === FALSE) {
 			return FALSE;
 		}

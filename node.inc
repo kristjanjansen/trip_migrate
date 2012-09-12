@@ -4,7 +4,7 @@
 class TripNodeMigration extends DrupalNode6Migration {
   public function __construct(array $arguments) {
     
-//    $arguments += array('default_uid' => 0);
+    $arguments += array('default_uid' => 1);
     
     parent::__construct($arguments);
     

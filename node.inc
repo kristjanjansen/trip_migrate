@@ -36,7 +36,26 @@ class TripNodeMigration extends DrupalNode6Migration {
     $query->fields('nr', array('body', 'teaser', 'format'));
     return $query;
   }
+/*
+  public function complete($node, stdClass $row) {
+   
+    $flags = Database::getConnection('default', $this->sourceConnection)
+      ->select('flag_content', 'fc')
+      ->fields('fc', array('content_id','fid', 'uid', 'sid', 'timestamp'))
+      ->condition('content_id', $node->nid)
+      ->execute();
 
+    $fcid = db_insert('flag_content')
+      ->fields(array(
+        'fid' => 2,
+        'content_type' => 'node',
+        'content_id' => $node->nid,
+        'uid' => $node->uid,
+        'sid' => 0,
+        'timestamp' => REQUEST_TIME,
+      ));
+    }
+*/  
 }
 
 

@@ -36,6 +36,8 @@ class TripNodeMigration extends DrupalNode6Migration {
     $query->fields('nr', array('body', 'teaser', 'format'));
     return $query;
   }
+  
+    
 /*
   public function complete($node, stdClass $row) {
    
@@ -101,6 +103,19 @@ class TripNodeImageMigration extends TripNodeMigration {
 	  $row->image = TripNodeImageMigration::getImage($row->nid);
 	}
 
+  public function complete($node, stdClass $row) {
+  
+    $image_styles = array('image_small', 'image_medium', 'image_big');
+    $styles = image_styles(); 
+	  foreach ($styles as $key => $style) {
+	    if (in_array($key, $image_styles)) {
+        $file = file_load($node->field_image_image[LANGUAGE_NONE][0]['fid']);
+	      image_style_create_derivative($styles[$key], $file->uri, image_style_path($key, $file->uri));
+	      
+	    }
+	  }   
+  }
+  
   public function getImage($nid) {
     $query = Database::getConnection('default', $this->sourceConnection)
       ->select('content_field_image', 'cfi')

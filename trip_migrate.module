@@ -115,6 +115,14 @@ function trip_migrate_register_migrations() {
         'source_type' => 'trip_blog',
         'destination_type' => 'blog',
       ),
+/*      array(
+        'description' => t('Migration of trip_forum_editor nodes from Drupal 6'),
+        'machine_name' => 'TripNodeForumEditor',
+        'class_name' => 'TripNodeMigration',
+        'source_type' => 'trip_forum_editor',
+        'destination_type' => 'forum_editor',
+      ),
+*/
   );
   
     $common_node_arguments = $common_arguments + array(
@@ -181,6 +189,15 @@ function trip_migrate_register_migrations() {
       'destination_type' => 'blog',
       'node_migration' => 'TripNodeBlog',
     ),
+/*
+    array(
+      'description' => t('Migration of trip_forum_editor comments from Drupal 6'),
+      'machine_name' => 'TripNodeForumEditorComment',
+      'source_type' => 'trip_forum_editor',
+      'destination_type' => 'forum_editor',
+      'node_migration' => 'TripNodeForumEditor',
+    ),
+*/
   );
 
   $common_comment_arguments = $common_arguments + array(

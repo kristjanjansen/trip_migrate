@@ -87,7 +87,7 @@ class TripNodeImageMigration extends TripNodeMigration {
  
     $this->addFieldMapping('field_image_image', 'image');
 		$this->addFieldMapping('field_image_image:source_dir')
-  		->defaultValue('http://localhost/sites/trip/files/imagecache/trip_image_big');
+  		->defaultValue('http://trip.ee/files/imagecache/trip_image_small');
 		$this->addFieldMapping('field_image_image:file_replace')
 		  ->defaultValue(FILE_EXISTS_REPLACE);
   
